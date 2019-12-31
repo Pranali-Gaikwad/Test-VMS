@@ -16,6 +16,6 @@ public interface IVisitorDao {
 
 	void updateVisitorById(Visitor visitor, long id);
 
-	void deleteVisitorById(long id);
+	int deleteVisitorById(long id);
 
 }

@@ -84,9 +84,10 @@ public class VisitorServiceImpl implements IVisitorService {
 	}
 
 	@Override
-	public void deleteVisitorById(long id) {
+	public int deleteVisitorById(long id) {
 		
-		visitorDao.deleteVisitorById(id);
+		int no=visitorDao.deleteVisitorById(id);
+		return no;
 	}
 
 	

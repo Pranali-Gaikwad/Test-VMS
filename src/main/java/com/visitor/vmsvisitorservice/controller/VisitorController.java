@@ -113,9 +113,10 @@ public class VisitorController {
 	 *
 	 */
 	@GetMapping("/deleteVisitorById/{id}")
-	public void deleteVisitorById(@PathVariable long id)
+	public int deleteVisitorById(@PathVariable long id)
 	{
-		visitorService.deleteVisitorById(id);
+		int no=visitorService.deleteVisitorById(id);
+		 return no;
 		
 	}
 	
