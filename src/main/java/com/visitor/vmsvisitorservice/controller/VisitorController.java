@@ -80,11 +80,11 @@ public class VisitorController {
 
 	}
 
-	@RequestMapping(value = "/enroll", method = RequestMethod.GET)
+	@RequestMapping(value = "/visitorRegistration", method = RequestMethod.GET)
 	public ModelAndView newRegistration(ModelMap model) {
 		Visitor visitor = new Visitor();
 		model.addAttribute("visitor", visitor);
-		return new ModelAndView("enroll");
+		return new ModelAndView("VisitorRegistration");
 	}
 
 	@PostMapping(value = "/save")
@@ -93,7 +93,7 @@ public class VisitorController {
 
 		visitorService.addVisitor(visitorDto);
 		List<Visitor> list = visitorService.visitorsList();
-		return new ModelAndView("viewstudents", "list", list);
+		return new ModelAndView("VisitorList", "list", list);
 	}
 
 }
