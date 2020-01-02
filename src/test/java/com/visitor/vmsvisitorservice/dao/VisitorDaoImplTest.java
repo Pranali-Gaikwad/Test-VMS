@@ -67,7 +67,7 @@ public class VisitorDaoImplTest
 
 	@Test
 	public void deleteVisitorByIdTest() {
-		int number = visitorDao.deleteVisitorById(14);
+		int number = visitorDao.deleteVisitorById(15);
 		assertEquals(1, number);
 	}
 
@@ -110,7 +110,7 @@ public class VisitorDaoImplTest
 	  v1.setContactPersonMobileNo("5643322156");
 	  
 	  visitorRepository.save(v1);
-	  
+	 
 	  }
 	
 	

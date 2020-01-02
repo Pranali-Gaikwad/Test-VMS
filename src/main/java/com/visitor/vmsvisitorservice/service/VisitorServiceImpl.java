@@ -53,8 +53,6 @@ public class VisitorServiceImpl implements IVisitorService {
 	@Override
 	public Visitor getByVisitorId(long id) {
 
-		// return visitorDao.findById(id);
-
 		Visitor visitorData = visitorDao.findById(id);
 
 		if (visitorData == null) {
@@ -85,12 +83,9 @@ public class VisitorServiceImpl implements IVisitorService {
 
 	@Override
 	public int deleteVisitorById(long id) {
-		
-		int no=visitorDao.deleteVisitorById(id);
+
+		int no = visitorDao.deleteVisitorById(id);
 		return no;
 	}
 
-	
-
-	
 }

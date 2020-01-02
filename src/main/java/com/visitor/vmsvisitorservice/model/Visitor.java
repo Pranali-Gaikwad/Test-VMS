@@ -38,12 +38,9 @@ public class Visitor {
 	@Column(name = "status", nullable = false, columnDefinition = "int default 0")
 	private int status;
 
-
 	public Visitor() {
 		super();
 	}
-
-	
 
 	public Visitor(long id, String name, String email, String mobileNo, String address, String idProof,
 			String contactPersonName, String contactPersonEmail, String reasonForVisit, String contactPersonMobileNo,
@@ -62,12 +59,6 @@ public class Visitor {
 		this.status = status;
 	}
 
-
-
-	
-
-
-
 	public Visitor(String name, String email, String mobileNo, String address, String idProof, String contactPersonName,
 			String contactPersonEmail, String reasonForVisit, String contactPersonMobileNo) {
 		super();
@@ -81,8 +72,6 @@ public class Visitor {
 		this.reasonForVisit = reasonForVisit;
 		this.contactPersonMobileNo = contactPersonMobileNo;
 	}
-
-
 
 	public long getId() {
 		return id;
@@ -171,7 +160,5 @@ public class Visitor {
 	public void setContactPersonMobileNo(String contactPersonMobileNo) {
 		this.contactPersonMobileNo = contactPersonMobileNo;
 	}
-
-	
 
 }

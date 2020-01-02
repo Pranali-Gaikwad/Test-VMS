@@ -2,17 +2,23 @@ package com.visitor.vmsvisitorservice.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.visitor.vmsvisitorservice.dto.VisitorDto;
 import com.visitor.vmsvisitorservice.exception.VisitorNotFoundException;
@@ -27,36 +33,16 @@ public class VisitorController {
 	@Autowired
 	private IVisitorService visitorService;
 
-	/**
-	 * Method used for Visitor registration
-	 * 
-	 * @param Visitor Object
-	 * @return status string
-	 */
 	@PostMapping("/addVisitor")
 
 	public ResponseEntity<String> addVisitor(@RequestBody VisitorDto visitorDto) {
 		return new ResponseEntity<String>(visitorService.addVisitor(visitorDto), HttpStatus.OK);
 	}
 
-	/**
-	 * Method used to get registered Visitors list
-	 * 
-	 * @param No any parameter provided
-	 * @return List of registered Visitors
-	 */
-
 	@GetMapping("/visitorslist")
 	public List<Visitor> visitorsList() {
 		return visitorService.visitorsList();
 	}
-
-	/**
-	 * Method used to fetch specific Visitor by Id
-	 * 
-	 * @param Id
-	 * @return Visitor object
-	 */
 
 	@GetMapping("/visitorslist/{id}")
 	public Visitor getByVisitorId(@PathVariable long id) {
@@ -70,13 +56,6 @@ public class VisitorController {
 
 	}
 
-	/**
-	 * Method used to fetch specific Visitor by Name
-	 * 
-	 * @param Name
-	 * @return Visitor object
-	 */
-
 	@PostMapping("/visitorByName")
 	public Visitor getVisitorByName(@RequestBody Visitor visitor) {
 		String name = visitor.getName();
@@ -84,41 +63,37 @@ public class VisitorController {
 		return visitorService.getVisitorByName(name);
 	}
 
-	/**
-	 * Method used to update Visitor
-	 * 
-	 * @param visitor object
-	 *
-	 */
 	@PutMapping("/updateVisitor")
 	public void updateVisitor(@RequestBody Visitor visitor) {
 		visitorService.updateVisitor(visitor);
 	}
 
-	/**
-	 * Method used to update Visitor by id using criteria builder
-	 * 
-	 * @param visitor object
-	 *
-	 */
-
 	@RequestMapping("/updateVisitorById/{id}")
 	public void updateVisitorById(@RequestBody Visitor visitor, @PathVariable long id) {
 		visitorService.updateVisitorById(visitor, id);
 	}
-	/**
-	 * Method used to delete Visitor by id using criteria builder
-	 * 
-	 * @param visitor object
-	 *
-	 */
+
 	@GetMapping("/deleteVisitorById/{id}")
-	public int deleteVisitorById(@PathVariable long id)
-	{
-		int no=visitorService.deleteVisitorById(id);
-		 return no;
-		
+	public int deleteVisitorById(@PathVariable long id) {
+		int no = visitorService.deleteVisitorById(id);
+		return no;
+
 	}
-	
+
+	@RequestMapping(value = "/enroll", method = RequestMethod.GET)
+	public ModelAndView newRegistration(ModelMap model) {
+		Visitor visitor = new Visitor();
+		model.addAttribute("visitor", visitor);
+		return new ModelAndView("enroll");
+	}
+
+	@PostMapping(value = "/save")
+	public ModelAndView saveRegistration(@Valid VisitorDto visitorDto, BindingResult result, ModelMap model,
+			RedirectAttributes redirectAttributes) {
+
+		visitorService.addVisitor(visitorDto);
+		List<Visitor> list = visitorService.visitorsList();
+		return new ModelAndView("viewstudents", "list", list);
+	}
 
 }

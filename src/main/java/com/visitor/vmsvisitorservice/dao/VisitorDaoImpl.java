@@ -91,12 +91,12 @@ public class VisitorDaoImpl implements IVisitorDao {
 
 	@Override
 	public int deleteVisitorById(long id) {
-		 CriteriaBuilder cb = entityManger.getCriteriaBuilder();
-		 CriteriaDelete<Visitor> delete = cb.createCriteriaDelete(Visitor.class);
-		 Root<Visitor> user = delete.from(Visitor.class);
-		 delete.where(cb.equal(user.get("id"), id));
-		 int no =entityManger.createQuery(delete).executeUpdate();
-		 return no;
-		 
+		CriteriaBuilder cb = entityManger.getCriteriaBuilder();
+		CriteriaDelete<Visitor> delete = cb.createCriteriaDelete(Visitor.class);
+		Root<Visitor> user = delete.from(Visitor.class);
+		delete.where(cb.equal(user.get("id"), id));
+		int no = entityManger.createQuery(delete).executeUpdate();
+		return no;
+
 	}
 }
