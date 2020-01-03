@@ -80,20 +80,6 @@ public class VisitorController {
 
 	}
 
-	@RequestMapping(value = "/visitorRegistration", method = RequestMethod.GET)
-	public ModelAndView newRegistration(ModelMap model) {
-		Visitor visitor = new Visitor();
-		model.addAttribute("visitor", visitor);
-		return new ModelAndView("VisitorRegistration");
-	}
-
-	@PostMapping(value = "/save")
-	public ModelAndView saveRegistration(@Valid VisitorDto visitorDto, BindingResult result, ModelMap model,
-			RedirectAttributes redirectAttributes) {
-
-		visitorService.addVisitor(visitorDto);
-		List<Visitor> list = visitorService.visitorsList();
-		return new ModelAndView("VisitorList", "list", list);
-	}
+	
 
 }

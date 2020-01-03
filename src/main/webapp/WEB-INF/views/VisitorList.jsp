@@ -18,6 +18,8 @@
 				<th>Reason For Visit</th>
 				<th>Contact Person MobileNo</th>
 				<th>Status</th>
+				<th>Edit</th>
+				<th>Delete</th> 
 				
 			</tr>
 
@@ -34,7 +36,10 @@
 					<td>${visitor.reasonForVisit}</td>
 					<td>${visitor.contactPersonMobileNo}</td>
 					<td>${visitor.status}</td>
-					
+					 <td><a href="/editVisitor/${visitor.id}">Edit</a></td>  
+                     <td><a href="/deleteVisitor/${visitor.id}">Delete</a></td>  
+                     
+                   
 				</tr>
 			</c:forEach>
 
